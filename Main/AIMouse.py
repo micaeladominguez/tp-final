@@ -4,6 +4,7 @@ import numpy as np
 import pyautogui
 import HandTrackingModule as htm
 import time
+import subprocess
 
 def main():
     # los anchos y altos de la pantalla y la camara
@@ -71,6 +72,11 @@ def main():
                     cv2.circle(img, (lineInfo[4], lineInfo[5]), 15, (0, 255, 0), cv2.FILLED)
                     pyautogui.click()
 
+            if fingers[1] == 1 and fingers[4] == 1:
+                subprocess.Popen(['open', '-a', 'Calendar'])
+
+            if sum(fingers[1:4]) > 2:
+                subprocess.Popen(['open', '-a', 'Notes'])
         # Escribe el fps
         cTime = time.time()
         fps = 1 / (cTime - pTime)
